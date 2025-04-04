@@ -1,0 +1,10 @@
+@import "@fontsource/inter";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  overscroll-behavior: none;
+  background-color: black;
+}
+
