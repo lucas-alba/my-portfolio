@@ -31,13 +31,11 @@ const Skills = () => {
       id="skills"
       className="min-h-screen bg-black text-white pt-4 pb-16 px-6 flex flex-col items-center"
     >
-      {/* 💥 Dramatic Header */}
       <motion.h2
         className="text-[8vw] font-bold mb-16 text-center"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
       >
         SKILLS
       </motion.h2>
