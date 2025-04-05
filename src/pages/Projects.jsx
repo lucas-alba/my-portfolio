@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const projects = [
@@ -24,12 +24,7 @@ const projects = [
 
 const Projects = () => {
   const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const titleOpacity = useTransform(scrollYProgress, [0.6, 0.75], [1, 0]);
+  useScroll({ target: sectionRef });
 
   return (
     <section
@@ -40,7 +35,9 @@ const Projects = () => {
       <div className="flex flex-col items-center px-6 md:px-12">
         <motion.h2
           className="text-[8vw] font-bold mb-16 text-center"
-          style={{ opacity: titleOpacity }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           FEATURED PROJECTS
         </motion.h2>
