@@ -13,7 +13,6 @@ const TradingSim = () => {
         </p>
       </div>
 
-      {/* Portfolio Section */}
       <Portfolio />
     </div>
   );

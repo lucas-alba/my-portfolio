@@ -41,7 +41,6 @@ const PerformanceChart = ({ data }) => {
         </p>
       </div>
 
-      {/* Make the chart visually balanced by giving it full width */}
       <div className="w-full h-[22rem]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>

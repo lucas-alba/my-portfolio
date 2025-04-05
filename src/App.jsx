@@ -7,7 +7,7 @@ import Contact from './pages/Contact.jsx';
 import Nav from './pages/Nav.jsx';
 import TradingSim from './pages/TradingSim.jsx'; 
 import TradingSimNav from './pages/TradingSimNav.jsx';
-import ScrollToTop from './ScrollToTop.jsx'; // 👈 Make sure this path matches where you save it
+import ScrollToTop from './ScrollToTop.jsx';
 
 function App() {
   return (

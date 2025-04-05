@@ -6,7 +6,7 @@ const Nav = () => {
 
   return (
     <>
-      {/* Fixed Top Nav */}
+      {/* Top Nav */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-black px-6 py-4 flex justify-between items-center">
         <h1 className="text-lg font-bold text-white">Lucas Alba</h1>
         <button
@@ -19,7 +19,7 @@ const Nav = () => {
         </button>
       </div>
 
-      {/* Floating Guide Menu */}
+      {/* Guide Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div

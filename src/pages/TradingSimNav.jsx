@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 const TradingSimNav = () => {
   return (
     <nav className="flex justify-between items-center px-6 py-4 bg-black text-white fixed top-0 left-0 right-0 z-50">
-      {/* Left: Lucas Alba */}
       <div className="text-lg font-bold">
         <Link to="/">Lucas Alba</Link>
       </div>
 
-      {/* Right: Home button-like link to go back to the main page */}
       <div>
         <Link
           to="/"
