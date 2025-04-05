@@ -9,9 +9,13 @@ const Portfolio = () => {
   const [performance, setPerformance] = useState([]);
   const [trades, setTrades] = useState([]);
 
+  const SUMMARY_API = import.meta.env.VITE_SUMMARY_API;
+  const PRICES_API = import.meta.env.VITE_PRICES_API;
+  const PERFORMANCE_API = import.meta.env.VITE_PERFORMANCE_API;
+  const TRADES_API = import.meta.env.VITE_PORTFOLIO_TRADES;
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/portfolio/summary')
+    axios.get('SUMMARY_API')
       .then(res => setSummary(res.data))
       .catch(err => console.error("Summary Error:", err));
   }, []);
@@ -19,7 +23,7 @@ const Portfolio = () => {
   // Auto-refresh prices
   useEffect(() => {
     const fetchPrices = () => {
-      axios.get('http://localhost:8080/api/market/prices')
+      axios.get('PRICES_API')
         .then(res => {
           setPrices(res.data);
           console.log("🔁 Updated prices:", res.data);
@@ -36,7 +40,7 @@ const Portfolio = () => {
   // Auto-refresh performance
   useEffect(() => {
     const fetchPerformance = () => {
-      axios.get('http://localhost:8080/api/portfolio/performance')
+      axios.get('PERFORMANCE_API')
         .then(res => {
           const formatted = res.data.map(entry => ({
             time: new Date(entry.timestamp).toLocaleTimeString([], {
@@ -59,7 +63,7 @@ const Portfolio = () => {
 
       // Fetch trade history
     useEffect(() => {
-      axios.get('http://localhost:8080/api/portfolio/trades')
+      axios.get('TRADES_API')
         .then(res => setTrades(res.data))
         .catch(err => console.error("Trades Error:", err));
     }, []);
