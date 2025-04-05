@@ -6,14 +6,17 @@ import Skills from './pages/Skills.jsx';
 import Contact from './pages/Contact.jsx';
 import Nav from './pages/Nav.jsx';
 import TradingSim from './pages/TradingSim.jsx'; 
+import TradingSimNav from './pages/TradingSimNav.jsx';
+import ScrollToTop from './ScrollToTop.jsx'; // 👈 Make sure this path matches where you save it
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <main>
         <Routes>
           <Route path="/" element={<><Nav /><Hero /><Projects /><Skills /><Contact /></>} />
-          <Route path="/tradingsim" element={<TradingSim />} />
+          <Route path="/tradingsim" element={<><TradingSimNav /><TradingSim /></>} />
         </Routes>
       </main>
     </Router>
