@@ -1,31 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './ticker.css'; // Make sure to import your CSS file if it's separate
+import './ticker.css';
+import PerformanceChart from './PerformanceChart';
 
 const Portfolio = () => {
   const [summary, setSummary] = useState(null);
   const [prices, setPrices] = useState([]);
+  const [performance, setPerformance] = useState([]);
 
+  // Fetch summary once
   useEffect(() => {
-    // Fetch Portfolio Summary
     axios.get('http://localhost:8080/api/portfolio/summary')
-      .then(res => {
-        console.log("✅ Summary:", res.data);
-        setSummary(res.data);
-      })
-      .catch(err => {
-        console.error("❌ Summary Error:", err);
-      });
+      .then(res => setSummary(res.data))
+      .catch(err => console.error("❌ Summary Error:", err));
+  }, []);
 
-    // Fetch Stock Prices
-    axios.get('http://localhost:8080/api/market/prices')
-      .then(res => {
-        console.log("✅ Prices:", res.data);
-        setPrices(res.data);
-      })
-      .catch(err => {
-        console.error("❌ Prices Error:", err);
-      });
+  // Auto-refresh prices
+  useEffect(() => {
+    const fetchPrices = () => {
+      axios.get('http://localhost:8080/api/market/prices')
+        .then(res => {
+          setPrices(res.data);
+          console.log("🔁 Updated prices:", res.data);
+        })
+        .catch(err => console.error("❌ Prices Error:", err));
+    };
+
+    fetchPrices(); // initial call
+    const interval = setInterval(fetchPrices, 15000); // every 15 seconds
+
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
+  // Auto-refresh performance
+  useEffect(() => {
+    const fetchPerformance = () => {
+      axios.get('http://localhost:8080/api/portfolio/performance')
+        .then(res => {
+          const formatted = res.data.map(entry => ({
+            time: new Date(entry.timestamp).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            }),
+            value: entry.portfolioValue
+          }));
+          setPerformance(formatted);
+        })
+        .catch(err => console.error("❌ Performance Error:", err));
+    };
+
+    fetchPerformance();
+    const interval = setInterval(fetchPerformance, 60000); // every 60 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -44,28 +72,11 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* 💼 Portfolio Section */}
-      <h1 className="text-3xl font-bold mb-6">💼 Portfolio Summary</h1>
-
-      {summary ? (
-        <div className="text-lg">
-          <p>💵 Cash Balance: ${summary.cashBalance.toFixed(2)}</p>
-
-          {summary.holdings && Object.keys(summary.holdings).length > 0 && (
-            <div className="mt-4">
-              <p>📊 Holdings:</p>
-              <ul className="ml-4 list-disc">
-                {Object.entries(summary.holdings).map(([symbol, qty]) => (
-                  <li key={symbol}>
-                    {symbol}: {qty} share{qty !== 1 ? 's' : ''}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+      {/* 📈 Portfolio Performance Chart */}
+      {performance.length > 0 ? (
+        <PerformanceChart data={performance} />
       ) : (
-        <p>Loading portfolio summary...</p>
+        <p className="text-center text-gray-400 mt-12">Loading performance data...</p>
       )}
     </div>
   );
