@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 
 const projects = [
   {
-    title: 'Trading Sim',
+    title: 'Trading Sim - Live Demo',
     description: 'Real-time simulator with strategy bots.',
     link: '/TradingSim',
   },
   {
-    title: 'Solar Forecasting',
+    title: 'Solar Forecasting - Live Demo',
     description: 'Daily output predictor using ML & weather APIs.',
     link: 'https://apex.oracle.com/pls/apex/r/carce/carce/solar-prediction-gbr-hosting-page?session=12883315525910',
     external: true,
   },
   {
-    title: 'DNA Storage',
+    title: 'DNA Storage - Github',
     description: 'Storing data in DNA molecules. Research-backed project.',
     link: 'https://github.com/lucas-alba/DNA-Storage',
     external: true,
