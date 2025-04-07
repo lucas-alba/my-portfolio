@@ -29,10 +29,15 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="min-h-screen bg-black text-white pt-4 pb-16 px-6 flex flex-col items-center"
+      className="relative min-h-screen bg-black text-white pt-4 pb-48 px-6 flex flex-col items-center overflow-visible"
     >
+      {/* 💜 Background Glow */}
+      <div className="absolute top-[25%] left-[15%] w-[60vw] h-[60vw] bg-[#4c1d95] rounded-full opacity-20 blur-[60px] z-0" />
+      <div className="absolute bottom-[-20%] right-[10%] w-[60vw] h-[60vw] bg-[#3b82f6] rounded-full opacity-15 blur-[60px] z-0" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none" />
+
       <motion.h2
-        className="text-[8vw] font-bold mb-16 text-center"
+        className="relative z-20 text-[8vw] font-bold mb-16 text-center"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -40,7 +45,7 @@ const Skills = () => {
         SKILLS
       </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-6xl">
+      <div className="relative z-20 grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-6xl">
         {skills.map((category, index) => (
           <div
             key={index}
