@@ -117,32 +117,37 @@ const Portfolio = () => {
       </ul>
     </div>
   )}
-  {/* Trades */}
-  {trades.length > 0 && (
+{/* Trades */}
+{trades.length > 0 && (
   <div className="max-w-4xl mx-auto mt-16">
-    <h2 className="text-2xl font-bold mb-4 text-center">Trade History</h2>
+    <h2 className="text-2xl font-bold mb-4 text-center">Last 5 Executed Trades</h2>
     <ul className="space-y-4">
-      {trades.slice().reverse().map((trade, index) => (
-        <li
-          key={index}
-          className="flex justify-between items-center px-6 py-4 bg-[#1a1a1a] rounded-xl shadow"
-        >
-          <div className="text-lg font-medium">
-            {trade.type === 'BUY' ? 'Bought' : 'Sold'} {trade.quantity} {trade.symbol}
-          </div>
-          <div className="text-sm">
-            <span className="text-white">
-              @ ${trade.price.toFixed(2)}
-            </span>{' '}
-            <span className="text-gray-400">
-              • {new Date(trade.timestamp).toLocaleString(undefined, {
-                dateStyle: 'medium',
-                timeStyle: 'short',
-              })}
-            </span>
-          </div>
-        </li>
-      ))}
+      {trades
+        .slice()
+        .reverse()
+        .slice(0, 5) // ✅ Only show the last 8 trades
+        .map((trade, index) => (
+          <li
+            key={index}
+            className="flex justify-between items-center px-6 py-4 bg-[#1a1a1a] rounded-xl shadow"
+          >
+            <div className="text-lg font-medium">
+              {trade.type === 'BUY' ? 'Bought' : 'Sold'} {trade.quantity} {trade.symbol}
+            </div>
+            <div className="text-sm">
+              <span className="text-white">
+                @ ${trade.price.toFixed(2)}
+              </span>{' '}
+              <span className="text-gray-400">
+                •{' '}
+                {new Date(trade.timestamp).toLocaleString(undefined, {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                })}
+              </span>
+            </div>
+          </li>
+        ))}
     </ul>
   </div>
 )}
