@@ -19,10 +19,13 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-6"
+      className="relative min-h-screen bg-black text-white flex flex-col justify-center items-center px-6 pt-24 pb-32"
     >
+      {/* Fade to black from Skills */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-0 pointer-events-none" />
+
       <motion.h2
-        className="text-[8vw] font-bold mb-20 text-center"
+        className="relative z-10 text-[8vw] font-bold mb-20 text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -30,7 +33,7 @@ const Contact = () => {
         CONTACT
       </motion.h2>
 
-      <div className="flex flex-col gap-8 w-full max-w-4xl">
+      <div className="relative z-10 flex flex-col gap-8 w-full max-w-4xl">
         {contactItems.map((item) => (
           <motion.a
             key={item.label}
