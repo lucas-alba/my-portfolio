@@ -9,7 +9,7 @@ const projects = [
     link: '/TradingSim',
   },
   {
-    title: 'Solar Forecasting - Live Demo',
+    title: 'Solar Prediction - Live Demo',
     description: 'Daily output predictor using ML & weather APIs.',
     link: 'https://apex.oracle.com/pls/apex/r/carce/carce/solar-prediction-gbr-hosting-page?session=12883315525910',
     external: true,
