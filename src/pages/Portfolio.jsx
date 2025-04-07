@@ -84,20 +84,20 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
-
-      {/* Performance Chart */}
-      {performance.length > 0 ? (
-        <PerformanceChart data={performance} />
-      ) : (
-        <p className="text-center text-gray-400 mt-12">Loading performance data...</p>
-      )}
-
-      {/* Holdings  */}
-  {summary?.holdings && Object.keys(summary.holdings).length > 0 && (
-    <div className="max-w-4xl mx-auto mt-16">
-      <h2 className="text-2xl font-bold mb-4 text-center">Current Holdings</h2>
-      <ul className="space-y-4">
-        {Object.entries(summary.holdings).map(([symbol, qty]) => {
+    {/* Performance Chart */}
+    {performance.length > 0 ? (
+      <PerformanceChart data={performance} />
+    ) : (
+      <p className="text-center text-gray-400 mt-12">Loading performance data...</p>
+    )}
+{/* Holdings  */}
+{summary?.holdings && Object.keys(summary.holdings).length > 0 && (
+  <div className="max-w-4xl mx-auto mt-16">
+    <h2 className="text-2xl font-bold mb-4 text-center">Current Holdings</h2>
+    <ul className="space-y-4">
+      {Object.entries(summary.holdings)
+        .filter(([_, qty]) => qty > 0) // 🧹 filter out 0-share holdings
+        .map(([symbol, qty]) => {
           const stock = prices.find(p => p.symbol === symbol);
           const currentPrice = stock ? stock.price.toFixed(2) : '—';
 
@@ -114,9 +114,9 @@ const Portfolio = () => {
             </li>
           );
         })}
-      </ul>
-    </div>
-  )}
+    </ul>
+  </div>
+)}
 {/* Trades */}
 {trades.length > 0 && (
   <div className="max-w-4xl mx-auto mt-16">
