@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ticker.css';
 import PerformanceChart from './PerformanceChart';
+import formatToEST from './formatToEST';
 
 const Portfolio = () => {
   const [summary, setSummary] = useState(null);
@@ -41,17 +42,13 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchPerformance = () => {
       axios.get(PERFORMANCE_API)
-        .then(res => {
-          const formatted = res.data.map(entry => ({
-            time: new Date(entry.timestamp).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            }),
-            value: entry.portfolioValue
-          }));
-          setPerformance(formatted);
-        })
+      .then(res => {
+        const formatted = res.data.map(entry => ({
+          time: formatToEST(entry.timestamp),
+          value: entry.portfolioValue
+        }));
+        setPerformance(formatted);
+      })      
         .catch(err => console.error("Performance Error:", err));
     };
 
