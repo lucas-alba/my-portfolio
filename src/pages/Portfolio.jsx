@@ -11,8 +11,8 @@ const Portfolio = () => {
   const [prices, setPrices] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [trades, setTrades] = useState([]);
-  const [loadingPerformance, setLoadingPerformance] = useState(true);
   const [timeUntilOpen, setTimeUntilOpen] = useState(getTimeUntilMarketOpen());
+  const [isPerformanceLoaded, setIsPerformanceLoaded] = useState(false); // ✅ loading flag
 
   const SUMMARY_API = import.meta.env.VITE_SUMMARY_API;
   const PRICES_API = import.meta.env.VITE_PRICES_API;
@@ -29,7 +29,7 @@ const Portfolio = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch summary
+  // Fetch portfolio summary
   useEffect(() => {
     axios.get(SUMMARY_API)
       .then(res => setSummary(res.data))
@@ -52,37 +52,27 @@ const Portfolio = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch performance data
+  // Performance data
   useEffect(() => {
     const fetchPerformance = () => {
-      setLoadingPerformance(true);
-
       axios.get(PERFORMANCE_API)
         .then(res => {
+          setIsPerformanceLoaded(true); // ✅ mark as loaded
+
           if (!res.data || res.data.length === 0) {
             console.log("📉 No performance data returned — market likely closed.");
-            setPerformance([]);
-          } else {
-            const formatted = res.data.map(entry => ({
-              time: formatToEST(entry.timestamp),
-              value: entry.portfolioValue
-            }));
-
-            // Only update if something changed
-            const lastNew = formatted[formatted.length - 1];
-            const lastOld = performance[performance.length - 1];
-
-            if (!lastOld || lastNew.time !== lastOld.time) {
-              setPerformance(formatted);
-            }
+            return;
           }
+
+          const formatted = res.data.map(entry => ({
+            time: formatToEST(entry.timestamp),
+            value: entry.portfolioValue
+          }));
+          setPerformance(formatted);
         })
         .catch(err => {
+          setIsPerformanceLoaded(true); // ✅ still mark as loaded on error
           console.error("Performance Error:", err);
-          setPerformance([]);
-        })
-        .finally(() => {
-          setLoadingPerformance(false);
         });
     };
 
@@ -114,14 +104,14 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Performance Chart / Loading / Closed */}
-      {loadingPerformance ? (
-        <p className="text-center text-gray-400 mt-12">Loading performance data...</p>
+      {/* Performance Chart or Loading or Market Closed */}
+      {!isPerformanceLoaded ? (
+        <div className="text-center text-lg text-gray-400 mt-12">Loading performance data...</div>
       ) : performance.length > 0 ? (
         <PerformanceChart data={performance} />
       ) : (
         <div className="bg-yellow-100 text-yellow-900 px-4 py-3 rounded-lg shadow mt-12 text-center text-lg font-semibold max-w-xl mx-auto">
-          📉 Market is closed. Reopens in {timeUntilOpen} ⏳
+          Market is closed. Reopens in {timeUntilOpen}
         </div>
       )}
 
