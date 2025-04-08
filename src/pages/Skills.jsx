@@ -31,7 +31,7 @@ const Skills = () => {
       id="skills"
       className="relative min-h-screen bg-black text-white pt-4 pb-48 px-6 flex flex-col items-center overflow-visible"
     >
-      {/* 💜 Background Glow */}
+      {/* Background Glow */}
       <div className="absolute top-[25%] left-[15%] w-[60vw] h-[60vw] bg-[#4c1d95] rounded-full opacity-20 blur-[60px] z-0" />
       <div className="absolute bottom-[-20%] right-[10%] w-[60vw] h-[60vw] bg-[#3b82f6] rounded-full opacity-15 blur-[60px] z-0" />
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none" />

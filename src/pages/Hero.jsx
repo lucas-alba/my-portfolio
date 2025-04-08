@@ -17,16 +17,12 @@ const Hero = () => {
       className="relative min-h-screen overflow-hidden bg-black text-white px-6 pt-24 pb-12 flex flex-col justify-between"
       style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
     >
-      {/* 🔵 Blurred Color Overlays */}
       <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vw] bg-[#4c1d95] rounded-full opacity-20 blur-[60px] z-0" />
       <div className="absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] bg-[#3b82f6] rounded-full opacity-15 blur-[50px] z-0" />
 
-      {/* 🔻 Bottom Gradient Fade to Black */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-black z-0 pointer-events-none" />
 
-      {/* 🌟 Main Content */}
       <div className="relative z-10">
-        {/* Intro Text */}
         <div className="max-w-2xl mt-24 text-left text-3xl leading-snug">
           <p>
             I’m an aspiring software engineer focused on building tools, simulations,

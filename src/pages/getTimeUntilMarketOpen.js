@@ -9,7 +9,7 @@ const getTimeUntilMarketOpen = () => {
     const nowMinutes = utcHour * 60 + utcMinute;
     let nextOpen = new Date(now);
   
-    // If today is weekday and before 9:30am ET (13:30 UTC)
+    // If today is weekday and before 9:30am ET
     if (utcDay >= 1 && utcDay <= 5 && nowMinutes < 13 * 60 + 30) {
       nextOpen.setUTCHours(13, 30, 0, 0);
     } else {

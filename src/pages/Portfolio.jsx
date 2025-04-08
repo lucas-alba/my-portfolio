@@ -12,7 +12,7 @@ const Portfolio = () => {
   const [performance, setPerformance] = useState([]);
   const [trades, setTrades] = useState([]);
   const [timeUntilOpen, setTimeUntilOpen] = useState(getTimeUntilMarketOpen());
-  const [isPerformanceLoaded, setIsPerformanceLoaded] = useState(false); // ✅ loading flag
+  const [isPerformanceLoaded, setIsPerformanceLoaded] = useState(false);
 
   const SUMMARY_API = import.meta.env.VITE_SUMMARY_API;
   const PRICES_API = import.meta.env.VITE_PRICES_API;
@@ -42,7 +42,7 @@ const Portfolio = () => {
       axios.get(PRICES_API)
         .then(res => {
           setPrices(res.data);
-          console.log("🔁 Updated prices:", res.data);
+          console.log("Updated prices:", res.data);
         })
         .catch(err => console.error("Prices Error:", err));
     };
@@ -57,7 +57,7 @@ const Portfolio = () => {
     const fetchPerformance = () => {
       axios.get(PERFORMANCE_API)
         .then(res => {
-          setIsPerformanceLoaded(true); // ✅ mark as loaded
+          setIsPerformanceLoaded(true); 
 
           if (!res.data || res.data.length === 0) {
             console.log("📉 No performance data returned — market likely closed.");
@@ -71,7 +71,7 @@ const Portfolio = () => {
           setPerformance(formatted);
         })
         .catch(err => {
-          setIsPerformanceLoaded(true); // ✅ still mark as loaded on error
+          setIsPerformanceLoaded(true);  
           console.error("Performance Error:", err);
         });
     };
