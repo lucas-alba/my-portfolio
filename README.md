@@ -7,4 +7,4 @@ This is my personal portfoliol website, designed to showcase my projects, skills
     - Dark-themed design inspired by Apple and yung.studio
     - Dynamic, animated and responsive frontend
     - Incorpates my real-time trading simulator
-      - LINK: https://github.com/lucas-alba/TradingSim 
+      - https://github.com/lucas-alba/TradingSim 
