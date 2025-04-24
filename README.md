@@ -3,6 +3,7 @@ This is my personal portfoliol website, designed to showcase my projects, skills
 
 ## How It's Made:
   - Tech Used: JavaScript, React, Tailwind CSS, Framer Motion
+    
   - Features:
     - Dark-themed design inspired by Apple and yung.studio
     - Dynamic, animated and responsive frontend
