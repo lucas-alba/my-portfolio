@@ -4,9 +4,9 @@ const isMarketOpen = () => {
     // Convert to ET
     const utcHour = now.getUTCHours();
     const utcMinute = now.getUTCMinutes();
-    const day = now.getUTCDay(); // 0 (Sun) - 6 (Sat)
+    const day = now.getUTCDay();
   
-    // Market open: 9:30 AM to 4:00 PM ET → 13:30 to 20:00 UTC
+    // Market open: 9:30 AM to 4:00 PM ET 
     const currentMinutes = utcHour * 60 + utcMinute;
     const openMinutes = 13 * 60 + 30;
     const closeMinutes = 20 * 60;

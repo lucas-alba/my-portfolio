@@ -19,7 +19,7 @@ const Portfolio = () => {
   const PERFORMANCE_API = import.meta.env.VITE_PERFORMANCE_API;
   const TRADES_API = import.meta.env.VITE_PORTFOLIO_TRADES;
 
-  // ⏱ Tick the countdown every minute
+  // Tick the countdown
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeUntilOpen(getTimeUntilMarketOpen());
@@ -36,7 +36,7 @@ const Portfolio = () => {
       .catch(err => console.error("Summary Error:", err));
   }, []);
 
-  // Auto-refresh prices
+  // Auto refresh prices
   useEffect(() => {
     const fetchPrices = () => {
       axios.get(PRICES_API)
@@ -140,7 +140,7 @@ const Portfolio = () => {
           </ul>
         </div>
       )}
-
+      
       {/* Trade History */}
       {trades.length > 0 && (
         <div className="max-w-4xl mx-auto mt-16">
